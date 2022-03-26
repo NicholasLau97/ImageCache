@@ -1,12 +1,19 @@
 package com.example.imagecache.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-data class Value(
-    val base64Encoding: Any,
+
+@Entity(
+    tableName = "image"
+)
+data class image(
+    @PrimaryKey(autoGenerate = true)
+    var id: Int? = null,
+    val base64Encoding: String,
     val height: Int,
     val imageWebSearchUrl: String,
     val name: String,
-    val provider: Provider,
     val thumbnail: String,
     val thumbnailHeight: Int,
     val thumbnailWidth: Int,
