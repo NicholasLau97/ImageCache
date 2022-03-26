@@ -4,10 +4,8 @@ import android.app.Application
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.imagecache.models.ImagesResponse
-import com.example.imagecache.models.SearchImages
 import com.example.imagecache.models.Value
 import com.example.imagecache.repository.ImagesRepository
 import com.example.imagecache.util.Resource
@@ -40,9 +38,7 @@ class MainViewModel(app:Application,val repository: ImagesRepository):AndroidVie
     fun displayImages(images:List<Value>){
         //display the images to infinite recycler view
     }
-    fun saveSearchedImagesToLocalDB(searchImages: SearchImages) = viewModelScope.launch {
-        //repository.upsert(searchImages)
-    }
+
     suspend fun searchImagesByTextFromAPI(searchText: String){
         searchImages.postValue(Resource.Loading())
         val response = repository.searchImages(searchText,"1","10","true")
