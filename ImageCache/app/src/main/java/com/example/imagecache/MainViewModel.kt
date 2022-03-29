@@ -1,19 +1,28 @@
 package com.example.imagecache
 
 import android.app.Application
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.View
+import android.webkit.URLUtil
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.imagecache.models.*
 import com.example.imagecache.repository.SearchImagesRepository
+import com.example.imagecache.util.Constants.Companion.WEB_INTENT_KEY_URL
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class MainViewModel(app: Application,
+
+
+class MainViewModel(
+    val context: Context,
+    val app: Application,
                     val searchImagesRepository: SearchImagesRepository): AndroidViewModel(app) {
 
     var searchText:String=""
@@ -31,6 +40,20 @@ class MainViewModel(app: Application,
 
     fun onWebViewBtnClick(view:View){
         Log.d("View Model","Web view btn clicked: $urlText")
+
+        var web_url:String = ""
+        if(URLUtil.isValidUrl(urlText)) {
+            web_url = urlText as String
+        }else if(urlText!=null){
+            web_url = "https://$urlText.com"
+        }else{
+            Toast.makeText(context,"URL is empty!",Toast.LENGTH_LONG).show()
+        }
+
+        val intent = Intent(context, WebActivity::class.java).apply {
+            putExtra(WEB_INTENT_KEY_URL, web_url)
+        }
+        startActivity(context, intent, null)
 
     }
     fun searchImages() =viewModelScope.launch {
