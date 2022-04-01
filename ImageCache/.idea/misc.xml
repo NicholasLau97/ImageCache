@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/huish/Desktop/GitHub/ImageCache/ImageCache/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1925925925925926" />
+        <entry key="..\:/Users/huish/Desktop/GitHub/ImageCache/ImageCache/app/src/main/res/drawable/pop_up_background.xml" value="0.15677083333333333" />
+        <entry key="..\:/Users/huish/Desktop/GitHub/ImageCache/ImageCache/app/src/main/res/layout/activity_main.xml" value="0.11574074074074074" />
         <entry key="..\:/Users/huish/Desktop/GitHub/ImageCache/ImageCache/app/src/main/res/layout/activity_web.xml" value="0.13069908814589665" />
+        <entry key="..\:/Users/huish/Desktop/GitHub/ImageCache/ImageCache/app/src/main/res/layout/pop_up.xml" value="0.15217391304347827" />
+        <entry key="..\:/Users/huish/Desktop/GitHub/ImageCache/ImageCache/app/src/main/res/layout/rv_image_item.xml" value="0.4" />
       </map>
     </option>
   </component>

@@ -12,6 +12,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.recyclerview.widget.RecyclerView
 import com.example.imagecache.models.*
 import com.example.imagecache.repository.SearchImagesRepository
 import com.example.imagecache.util.Constants.Companion.WEB_INTENT_KEY_URL
@@ -23,12 +24,14 @@ import retrofit2.Response
 class MainViewModel(
     val context: Context,
     val app: Application,
-                    val searchImagesRepository: SearchImagesRepository): AndroidViewModel(app) {
+    val searchImagesRepository: SearchImagesRepository): AndroidViewModel(app) {
 
     var searchText:String=""
     var urlText:String?=null
 
     var displayImages:MutableLiveData<List<Image>> = MutableLiveData()
+
+    lateinit var studentRecyclerView: RecyclerView
 
 
     fun onSearchBtnClick(view: View){
@@ -41,7 +44,7 @@ class MainViewModel(
     fun onWebViewBtnClick(view:View){
         Log.d("View Model","Web view btn clicked: $urlText")
 
-        var web_url:String = ""
+        var web_url:String? = null
         if(URLUtil.isValidUrl(urlText)) {
             web_url = urlText as String
         }else if(urlText!=null){
@@ -50,13 +53,15 @@ class MainViewModel(
             Toast.makeText(context,"URL is empty!",Toast.LENGTH_LONG).show()
         }
 
-        val intent = Intent(context, WebActivity::class.java).apply {
-            putExtra(WEB_INTENT_KEY_URL, web_url)
+        if(web_url != null) {
+            val intent = Intent(context, WebActivity::class.java).apply {
+                putExtra(WEB_INTENT_KEY_URL, web_url)
+            }
+            startActivity(context, intent, null)
         }
-        startActivity(context, intent, null)
 
     }
-    fun searchImages() =viewModelScope.launch {
+    fun searchImages() = viewModelScope.launch {
 
         val q: String = searchText as String
         val response = searchImagesRepository.searchImages(q)
@@ -88,8 +93,10 @@ class MainViewModel(
                     )
                     //Log.d("View Model","insert image : "+image_data.toString())
                     searchImagesRepository.insertImage(image_data)
-                    insertedImageData.toMutableList().add(image_data)
+                    //insertedImageData.toMutableList().add(image_data)
+                    insertedImageData+=image_data
                 }
+
                 displayImages.value = insertedImageData;
             }
         }else{
