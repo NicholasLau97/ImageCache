@@ -10,71 +10,90 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/parentview"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvImage"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/etSearch"
-                android:text="@={viewmodel.searchText}"
-                android:layout_width="0dp"
-                android:layout_height="46dp"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:hint="Search..."
-                android:paddingHorizontal="12dp"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnSearch"
-                android:onClick="@{viewmodel::onSearchBtnClick}"
-                android:layout_width="0dp"
-                android:layout_height="46dp"
-                android:layout_weight="2"
-                android:text="Search"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/etSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:hint="Search..."
+                    android:paddingHorizontal="12dp"
+                    android:text="@={viewmodel.searchText}"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btnSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_weight="2"
+                    android:onClick="@{viewmodel::onSearchBtnClick}"
+                    android:text="Search"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-            <EditText
-                android:id="@+id/etUrl"
-                android:text="@={viewmodel.urlText}"
-                android:layout_width="0dp"
-                android:layout_height="46dp"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:hint="URL..."
-                android:paddingHorizontal="12dp"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnWebview"
-                android:onClick="@{viewmodel::onWebViewBtnClick}"
-                android:layout_width="0dp"
-                android:layout_height="46dp"
-                android:layout_weight="2"
-                android:text="Open"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/etUrl"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:hint="URL..."
+                    android:paddingHorizontal="12dp"
+                    android:text="@={viewmodel.urlText}"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnWebview"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_weight="2"
+                    android:onClick="@{viewmodel::onWebViewBtnClick}"
+                    android:text="Open"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
